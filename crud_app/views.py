@@ -13,7 +13,7 @@ def form(request):
     data = {}
     data['form'] = EquipamentForm()
 
-    return render(request, "formulario.html", data)
+    return render(request, "form.html", data)
 
 def create(request):
 
@@ -21,3 +21,27 @@ def create(request):
         if form.is_valid():
             form.save()
             return redirect('home')
+
+def view(request, pk):
+    
+    data = {}
+    data['db'] = Equipament.objects.get(pk=pk)
+
+    return render(request, 'view.html', data)
+
+def edit(request, pk):
+    
+    data = {}
+    data['db'] = Equipament.objects.get(pk=pk)
+    data['form'] = EquipamentForm(instance=data['db'])
+
+    return render(request, "form.html", data)
+
+def update(request, pk): 
+
+    data = {}
+    data['db'] = Equipament.objects.get(pk=pk)
+    form = EquipamentForm(request.POST or None, instance=data['db'])
+    if form.is_valid():
+        form.save()
+        return redirect('home')
