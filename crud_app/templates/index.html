@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Equipamentos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <div class="col-8 m-auto pt-2 pb-2 text-center">
+        <h1>Equipamentos do Laboratório de física</h1>
+    </div>
+    <div class="col-8 m-auto pt-2 pb-2 text-center">
+        <a href="/form" class="btn btn-success">Add</a>
+    </div>
+    <div class="col-8 m-auto pt-2 pb-2 text-center">
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome do Equipamento</th>
+                <th scope="col">Laboratório</th>
+                <th scope="col">Patrimônio</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for dbs in db %}  
+              <tr>
+                <th>{{dbs.id}}</th>
+                <td>{{dbs.equipament_name}}</td>
+                <td>{{dbs.lab_name}}</td>
+                <td>{{dbs.patrimony}}</td>
+                <td>
+                    <a href="/view/{{dbs.id}}" class="btn btn-dark">Visualizar</a>
+                    <a href="" class="btn btn-primary">Editar</a>
+                    <a href="" class="btn btn-danger">Deletar</a>
+                </td>
+              </tr>
+              {% endfor %}  
+           
+            </tbody>
+        </table>    
+    </div>
+
+  </body>
+</html>

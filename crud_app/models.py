@@ -1,3 +1,6 @@
 from django.db import models
 
-# Create your models here.
+class Equipament(models.Model):
+    equipament_name = models.CharField(max_length=250)
+    lab_name = models.CharField(max_length=250)
+    patrimony = models.IntegerField()
