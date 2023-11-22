@@ -1,12 +1,24 @@
 from django.shortcuts import render, redirect
 from crud_app.forms import EquipamentForm
 from crud_app.models import Equipament
+from django.core.paginator import Paginator
+
 
 def home(request):
     data = {}
-    data['db'] = Equipament.objects.all()
+    
+    search = request.GET.get('search')
+    if search:
+        data['db'] = Equipament.objects.get(equipament_name__icontains=search)
+        
+        return render(request, "search.html", data)
+    else:
+        all_equipaments = Equipament.objects.all()
+        paginator = Paginator(all_equipaments, 2)
+        pages = request.GET.get('page')
+        data['db'] = paginator.get_page(pages)
+        return render(request, "index.html", data)
 
-    return render(request, "index.html", data)
 
 def form(request):
 
@@ -51,3 +63,5 @@ def delete(request, pk):
     db = Equipament.objects.get(pk=pk)
     db.delete()
     return redirect('home')
+
+
